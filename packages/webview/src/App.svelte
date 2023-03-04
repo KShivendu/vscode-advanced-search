@@ -1,11 +1,9 @@
 <script lang="ts">
-	import Counter from './lib/Counter.svelte';
+	import Search from './lib/Search.svelte';
 </script>
 
 <main>
 	<h1>Advanced Code Search</h1>
 
-	<div class="card">
-		<Counter />
-	</div>
+	<Search />
 </main>

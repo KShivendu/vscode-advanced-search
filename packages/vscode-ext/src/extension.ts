@@ -20,8 +20,6 @@ export function activate(context: vscode.ExtensionContext) {
 		'advanced-code-search.helloWorld',
 		() => {
 			// The code you place here will be executed every time your command is executed
-			// Display a message box to the user
-			vscode.window.showInformationMessage('Hello World from Code Search!');
 
 			const panel = vscode.window.createWebviewPanel(
 				'codeSearch',
@@ -36,8 +34,6 @@ export function activate(context: vscode.ExtensionContext) {
 				path.resolve(__dirname, '../webview-dist/index.html'),
 				'utf8',
 			).then(html => {
-				console.log('html', html);
-
 				panel.webview.html = html;
 			});
 		},
