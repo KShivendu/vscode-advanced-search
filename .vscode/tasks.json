@@ -5,8 +5,11 @@
 	"tasks": [
 		{
 			"type": "npm",
-			"script": "watch",
-			"problemMatcher": "$tsc-watch",
+			"script": "esbuild-watch",
+			"options": {
+				"cwd": "${workspaceFolder}/packages/vscode-ext"
+			},
+			"problemMatcher": "$esbuild-watch",
 			"isBackground": true,
 			"presentation": {
 				"reveal": "never"
