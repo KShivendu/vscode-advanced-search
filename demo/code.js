@@ -9,9 +9,6 @@ define(['utils/crashDetection', 'utils/selfDriving'], function (crashDetection, 
     }
 });
 
-// Regex (not possible but still an attempt):
-// define\(\[.*\], function \(.*\) \{(.|\n)*\}
-
 // Search:
 // define([:[s1], :[s2]], function (:[v1], :[v2]) {:[body]})
 
@@ -22,3 +19,9 @@ import(
     })
 )
 */
+
+/*
+Regex (not possible but still an attempt):
+define\(\[.*\], function \(.*\) \{(.)*\}
+*/
+
