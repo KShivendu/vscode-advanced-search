@@ -26,8 +26,17 @@
 				"title": "Structured Replace"
 			}
 		],
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "advanced-code-search-viewContainer",
+					"title": "Advanced Code Search",
+					"icon": "resources/viewContainer.svg"
+				}
+			]
+		},
 		"views": {
-			"explorer": [
+			"advanced-code-search-viewContainer": [
 				{
 					"id": "advanced-code-search.codeSearch",
 					"name": "Code Search",
