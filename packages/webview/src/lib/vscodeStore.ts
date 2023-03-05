@@ -8,7 +8,7 @@ let lastVscodeState: State = vscode.getState() ?? {
 	searchResults: null,
 };
 
-type Match = {
+export type Match = {
 	start: {
 		line: number;
 		character: number;
