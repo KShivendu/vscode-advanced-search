@@ -3,6 +3,7 @@ import { writable } from 'svelte/store';
 const vscode = acquireVsCodeApi();
 
 let lastVscodeState: State = vscode.getState() ?? {
+	searchInput: '',
 	searchQuery: '',
 	searchResults: null,
 };
@@ -18,12 +19,13 @@ type Match = {
 	};
 };
 
-type FileResult = {
+export type FileResult = {
 	filename: string;
 	matches: Match[];
 };
 
 type State = {
+	searchInput: string;
 	searchQuery: string;
 	searchResults: FileResult[] | null;
 };

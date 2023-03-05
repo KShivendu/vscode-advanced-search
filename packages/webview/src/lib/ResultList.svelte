@@ -1,12 +1,13 @@
 <script>
+	import FileResult from './FileResult.svelte';
 	import { vscodeStore } from './vscodeStore';
 </script>
 
 {#if $vscodeStore.searchQuery.length > 0}
-	<ul>
+	<ul style="margin-top: 10px;">
 		{#if $vscodeStore.searchResults}
 			{#each $vscodeStore.searchResults as fileResult}
-				<li>{fileResult.filename}</li>
+				<FileResult result={fileResult} />
 			{:else}
 				No results found
 			{/each}

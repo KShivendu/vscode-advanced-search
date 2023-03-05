@@ -17,3 +17,14 @@ body {
 	min-height: 100vh;
 	background: var(--background);
 }
+
+main {
+	padding-top: 10px;
+}
+
+ul,
+ol {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
