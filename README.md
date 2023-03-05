@@ -7,41 +7,59 @@ This extension allows you to do a structured search on the code and replace it. 
 1. Follow https://pnpm.io/installation to install pnpm.
 2. Run `pnpm install` to install dependencies.
 3. Go to `packages/webview` and run `pnpm dev`. This will build the UI of the extension.
+4. Install workspace recommended extensions from VS code marketplace. https://marketplace.visualstudio.com/items?itemName=connor4312.esbuild-problem-matchers
 4. Install comby from https://comby.dev/docs/get-started
 5. Open the "Run and debug" panel in VS code and click "Run Extension" to run the extension
 
 ## Basic example 
 
-Here is a simple go program
-```
-package main 
-import "fmt" 
-
-func main() {
-	fmt.Println("foo")
-	
-}
+Here is a simple js program written using AMD modules
+```js
+define(['utils/crashDetection', 'utils/selfDriving'], function (crashDetection, selfDriving) {
+    // full self driving
+    while (true) {
+        if (crashDetection.goingToCrash()) {
+            selfDriving.dontCrash();
+        }
+    }
+})
 ``` 
-Now if you want to replace the argument of `Println("foo")` with Println("foo", "bar") 
+Now if we want to convert it to use ES6 dynamic import instead:
 
-By using our extension you can achive this by
+Enter the following search query in the search box: 
+```js
+define([:[s1], :[s2]], function (:[v1], :[v2]) {:[body]})
+```
 
-insert `fmt.Println(:[arg])` this text in search query box of the extension 
-
-and in the insert query box  `fmt.Println(:[arg], "baar")` 
+And the following replace query: 
+```js
+import(
+    Promise.all([import(:[s1]), import(:[s2])]).then(([:[v1],:[v2]]) => {
+        :[body]
+    })
+)
+```
  
 and press  `replace` button. 
 
-in the left pane we can see the applied change:
+in the right pane we can see the applied change:
 ```
-package main 
-import "fmt" 
+import(
+    Promise.all([import('utils/crashDetection'), import('utils/selfDriving')]).then(([crashDetection, selfDriving]) => {
+        // full self driving
+        while (true) {
+            if (crashDetection.goingToCrash()) {
+                selfDriving.dontCrash();
+            }
+        }
+    })
+);
+```
 
-func main() {
-	fmt.Println("foo", "bar")
-	
-} 
-```
+This change is impossible to do with regex since it cannot understand balanced parentheses.
+
+You can make changes in the diff view and save and close the diff view to apply the changes.
+
 we're using Comby. Please refer comby docs: https://comby.dev/docs/overview 
 
 
