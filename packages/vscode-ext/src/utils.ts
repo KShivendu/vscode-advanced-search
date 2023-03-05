@@ -1,5 +1,5 @@
 import { exec } from 'child_process';
-import { Match, FileResult } from '../../webview/src/lib/vscodeStore';
+import { Match, FileResult } from 'shared/types';
 
 export async function structuredSearch(query: string, dir: string, langauge: string): Promise<FileResult[]> {
 

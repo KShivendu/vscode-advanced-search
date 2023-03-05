@@ -2,6 +2,9 @@ lockfileVersion: 5.4
 
 importers:
 
+  packages/shared:
+    specifiers: {}
+
   packages/vscode-ext:
     specifiers:
       '@types/glob': ^8.1.0
@@ -15,6 +18,7 @@ importers:
       eslint: ^8.34.0
       glob: ^8.1.0
       mocha: ^10.2.0
+      shared: workspace:*
       typescript: ^4.9.5
     devDependencies:
       '@types/glob': 8.1.0
@@ -28,6 +32,7 @@ importers:
       eslint: 8.35.0
       glob: 8.1.0
       mocha: 10.2.0
+      shared: link:../shared
       typescript: 4.9.5
 
   packages/webview:
@@ -36,6 +41,7 @@ importers:
       '@tsconfig/svelte': ^3.0.0
       '@vscode/webview-ui-toolkit': ^1.2.2
       rollup: ^3.18.0
+      shared: workspace:*
       svelte: ^3.55.1
       svelte-check: ^2.10.3
       tslib: ^2.5.0
@@ -47,6 +53,7 @@ importers:
       '@tsconfig/svelte': 3.0.0
       '@vscode/webview-ui-toolkit': 1.2.2
       rollup: 3.18.0
+      shared: link:../shared
       svelte: 3.55.1
       svelte-check: 2.10.3_svelte@3.55.1
       tslib: 2.5.0
