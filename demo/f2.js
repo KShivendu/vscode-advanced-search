@@ -1,6 +1,6 @@
 
 function foo(a, b) { // Change my params
-    console.log("hello");
+    return a + b;
 }
 
 foo(1, 2);
