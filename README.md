@@ -63,5 +63,10 @@ You can make changes in the diff view and save and close the diff view to apply 
 We're using Comby. Please refer comby docs: https://comby.dev/docs/overview
 
 
+## Future roadmap:
+
+- [ ] Extend UI to support comby rules for writing `where` and `rewrite` expressions.
+- [ ] Ability to inject custom hole (`:[a]`) substitution using js. This will allow us to do more complex transformations based on from the AST and filtering of nodes.
+
 ## Citation:
 https://github.com/comby-tools/comby
