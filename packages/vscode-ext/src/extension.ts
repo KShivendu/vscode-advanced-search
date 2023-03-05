@@ -107,16 +107,14 @@ export function activate(context: vscode.ExtensionContext) {
 				'Structured Replace diff'
 			);
 
-			// vscode.workspace.textDocuments.filter(doc => doc.fileName.endsWith('tempFile'))[0];
-
-			await new Promise((res, rej) => {
+			const finalContent = await new Promise((res, rej) => {
 				vscode.workspace.onDidCloseTextDocument((closedDoc) => {
-					const tempWasClosed = closedDoc.fileName.endsWith('tempFile');
-					if (tempWasClosed) res();
+					const tempWasClosed = closedDoc.fileName.endsWith('tempFile') && closedDoc.isClosed;
+					if (tempWasClosed) res(closedDoc.getText());
 				});
 			});
-
-			console.log(res);
+			
+			writeFileSync(file.filename, finalContent);
 		}
 	}
 
