@@ -3,6 +3,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import { CodeSearchViewProvider } from './CodeSearchViewProvider';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -13,6 +14,14 @@ export function activate(context: vscode.ExtensionContext) {
 		'Congratulations, your extension "advanced-code-search" is now active!',
 	);
 
+	const codeSearchViewProvider = new CodeSearchViewProvider();
+	context.subscriptions.push(
+		vscode.window.registerWebviewViewProvider(
+			CodeSearchViewProvider.viewType,
+			codeSearchViewProvider,
+		),
+	);
+
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
@@ -20,6 +29,8 @@ export function activate(context: vscode.ExtensionContext) {
 		'advanced-code-search.helloWorld',
 		() => {
 			// The code you place here will be executed every time your command is executed
+
+			// create a webview panel in sidebar
 
 			const panel = vscode.window.createWebviewPanel(
 				'codeSearch',

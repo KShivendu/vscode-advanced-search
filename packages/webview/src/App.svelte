@@ -3,7 +3,5 @@
 </script>
 
 <main>
-	<h1>Advanced Code Search</h1>
-
 	<Search />
 </main>
