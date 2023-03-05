@@ -2,6 +2,8 @@
 
 This extension allows you to do a structured search on the code and replace it. This is much more powerful than the built-in search and replace which is limited to regex at the best.
 
+> Checkout https://youtu.be/J11cLFDFXTk for the demo video
+
 ## Setup:
 
 1. Follow https://pnpm.io/installation to install pnpm.
@@ -60,13 +62,14 @@ This change is impossible to do with regex since it cannot understand balanced p
 
 You can make changes in the diff view and save and close the diff view to apply the changes.
 
-We're using Comby. Please refer comby docs: https://comby.dev/docs/overview
+VS code default search uses [ripgrep](https://github.com/BurntSushi/ripgrep). But we're using [comby](https://github.com/comby-tools/comby). Please refer comby [docs](https://comby.dev/docs/overview) for more info on the search and replace syntax
 
 
 ## Future roadmap:
 
-- [ ] Extend UI to support comby rules for writing `where` and `rewrite` expressions.
-- [ ] Ability to inject custom hole (`:[a]`) substitution using js. This will allow us to do more complex transformations based on from the AST and filtering of nodes.
+- Release on VS code marketplace.
+- Extend UI to support comby rules for writing `where` and `rewrite` expressions.
+- Ability to inject custom hole (`:[a]`) substitution using js. This will allow us to do more complex transformations based on from the AST and filtering of nodes.
 
 ## Citation:
-https://github.com/comby-tools/comby
+https://github.com/comby-tools/comby (Special thanks to [Rijnard van Tonder](https://github.com/rvantonder) for starting the project)
