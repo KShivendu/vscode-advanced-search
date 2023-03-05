@@ -6,7 +6,7 @@ import * as path from 'path';
 import { CodeSearchViewProvider } from './CodeSearchViewProvider';
 import { structuredReplace, structuredSearch } from './utils';
 // import write properties from fs:
-import { writeFileSync } from 'fs';
+import { close, writeFileSync } from 'fs';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -106,6 +106,17 @@ export function activate(context: vscode.ExtensionContext) {
 				vscode.Uri.file(tempFile),
 				'Structured Replace diff'
 			);
+
+			// vscode.workspace.textDocuments.filter(doc => doc.fileName.endsWith('tempFile'))[0];
+
+			await new Promise((res, rej) => {
+				vscode.workspace.onDidCloseTextDocument((closedDoc) => {
+					const tempWasClosed = closedDoc.fileName.endsWith('tempFile');
+					if (tempWasClosed) res();
+				});
+			});
+
+			console.log(res);
 		}
 	}
 
