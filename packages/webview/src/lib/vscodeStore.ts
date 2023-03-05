@@ -4,12 +4,14 @@ import type { FileResult } from 'shared/types';
 
 let lastVscodeState: State = vscode.getState() ?? {
 	searchInput: '',
+	replaceInput: '',
 	searchQuery: '',
 	searchResults: null,
 };
 
 type State = {
 	searchInput: string;
+	replaceInput: string;
 	searchQuery: string;
 	searchResults: FileResult[] | null;
 };
