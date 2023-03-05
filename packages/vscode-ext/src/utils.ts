@@ -9,7 +9,7 @@ const excludeDir = ['node_modules', 'dist', 'build', '__pycache__', '.pytest_cac
 
 
 export async function structuredSearch(query: string, dir: string, langauge: string): Promise<SearchResult[]> {
-    const searchCmd = `comby -exclude-dir ${excludeDir.join(',')} '${JSON.stringify(query)}' '' -json-lines -matcher ${langauge} -match-only -d ${dir}`;
+    const searchCmd = `comby -exclude-dir ${excludeDir.join(',')} ${JSON.stringify(query)} '' -json-lines -matcher ${langauge} -match-only -d ${dir}`;
 
     return new Promise((res, rej) => {
         exec(searchCmd, (err, stdout, stderr) => {
@@ -45,7 +45,7 @@ export async function structuredSearch(query: string, dir: string, langauge: str
 
 
 export async function structuredReplaceCommand(searchQuery: string, replaceQuery: string, dir: string, language: string): Promise<ReplaceResult[]> {
-    const replaceCommand = `comby -exclude-dir  ${excludeDir.join(',')} '${JSON.stringify(searchQuery)}' '${JSON.stringify(replaceQuery)}' -json-lines -matcher ${language} -d ${dir}`;
+    const replaceCommand = `comby -exclude-dir  ${excludeDir.join(',')} ${JSON.stringify(searchQuery)} ${JSON.stringify(replaceQuery)} -json-lines -matcher ${language} -d ${dir}`;
 
     return new Promise((res, rej) => {
         exec(replaceCommand, (err, stdout, stderr) => {
