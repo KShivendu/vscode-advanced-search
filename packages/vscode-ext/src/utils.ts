@@ -17,6 +17,7 @@ export async function structuredSearch(query: string, dir: string, langauge: str
                         filename: result.uri,
                         matches: result.matches.map((match: any) => {
                             return {
+                                value: match.matched,
                                 start: {
                                     line: match.range.start.line,
                                     character: match.range.start.column,
