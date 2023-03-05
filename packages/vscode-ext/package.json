@@ -20,6 +20,10 @@
 			{
 				"command": "advanced-code-search.structuredSearch",
 				"title": "Structured Search"
+			},
+			{
+				"command": "advanced-code-search.structuredReplace",
+				"title": "Structured Replace"
 			}
 		],
 		"views": {
