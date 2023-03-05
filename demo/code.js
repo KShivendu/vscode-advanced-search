@@ -18,7 +18,6 @@ define(['utils/crashDetection', 'utils/selfDriving'], function (crashDetection, 
 /* Replace:
 import(
     Promise.all([import(:[s1]), import(:[s2])]).then(([:[v1],:[v2]]) => {
-        // Hello world:
         :[body]
     })
 )
