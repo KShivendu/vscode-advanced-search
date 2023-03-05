@@ -7,8 +7,8 @@ export function openMatchInEditor({filepath, match}:{
 }) {
 	vscode.window.showTextDocument(vscode.Uri.file(filepath), {
 		selection: new vscode.Range(
-			new vscode.Position(match.start.line, match.start.character),
-			new vscode.Position(match.end.line, match.end.character),
+			new vscode.Position(match.start.line-1, match.start.character-1),
+			new vscode.Position(match.end.line-1, match.end.character-1),
 		),
 		preview: true,
 	});

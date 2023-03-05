@@ -1,7 +1,6 @@
 import { writable } from 'svelte/store';
+import {vscode} from './vscode'
 import type { FileResult } from 'shared/types';
-
-const vscode = acquireVsCodeApi();
 
 let lastVscodeState: State = vscode.getState() ?? {
 	searchInput: '',
@@ -19,4 +18,19 @@ export const vscodeStore = writable<State>(lastVscodeState);
 
 vscodeStore.subscribe(state => {
 	vscode.setState(state);
+});
+
+window.addEventListener('message', event => {
+	console.log(event.data);
+	
+	const message = event.data; // The JSON data our extension sent
+
+	switch (message.command) {
+		case 'searchResults':
+			vscodeStore.update(state => {
+				state.searchResults = message.data.searchResults;
+				return state;
+			});
+			break;
+	}
 });

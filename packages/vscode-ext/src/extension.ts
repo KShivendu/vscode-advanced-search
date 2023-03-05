@@ -15,7 +15,7 @@ export function activate(context: vscode.ExtensionContext) {
 		'Congratulations, your extension "advanced-code-search" is now active!',
 	);
 
-	const codeSearchViewProvider = new CodeSearchViewProvider();
+	const codeSearchViewProvider = new CodeSearchViewProvider(context);
 	context.subscriptions.push(
 		vscode.window.registerWebviewViewProvider(
 			CodeSearchViewProvider.viewType,

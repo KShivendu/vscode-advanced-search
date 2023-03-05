@@ -2,7 +2,7 @@ import { exec } from 'child_process';
 import { Match, FileResult as SearchResult, ReplaceResult } from 'shared/types';
 
 export async function structuredSearch(query: string, dir: string, langauge: string): Promise<SearchResult[]> {
-    const searchCmd = `comby '${query}' '' -json-lines -matcher ${langauge} -match-only -d ${dir}`;
+    const searchCmd = `comby -exclude-dir node_modules '${query}' '' -json-lines -matcher ${langauge} -match-only -d ${dir}`;
 
     return new Promise((res, rej) => {
         exec(searchCmd, (err, stdout, stderr) => {
@@ -17,7 +17,7 @@ export async function structuredSearch(query: string, dir: string, langauge: str
                         filename: result.uri,
                         matches: result.matches.map((match: any) => {
                             return {
-                                value: match.matched,
+                                matchText: match.matched,
                                 start: {
                                     line: match.range.start.line,
                                     character: match.range.start.column,
@@ -38,7 +38,7 @@ export async function structuredSearch(query: string, dir: string, langauge: str
 
 
 export async function structuredReplace(searchQuery: string, replaceQuery: string, dir: string, language: string): Promise<ReplaceResult[]> {
-    const replaceCommand = `comby '${searchQuery}' '${replaceQuery}' -json-lines -matcher ${language} -d ${dir}`;
+    const replaceCommand = `comby -exclude-dir node_modules '${searchQuery}' '${replaceQuery}' -json-lines -matcher ${language} -d ${dir}`;
 
     return new Promise((res, rej) => {
         exec(replaceCommand, (err, stdout, stderr) => {

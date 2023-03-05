@@ -6,6 +6,7 @@
 		vsCodeTextField,
 	} from '@vscode/webview-ui-toolkit';
 	import SearchIcon from './SearchIcon.svelte';
+	import { vscode } from './vscode';
 	import { vscodeStore } from './vscodeStore';
 
 	provideVSCodeDesignSystem().register(vsCodeButton(), vsCodeTextArea());
@@ -15,18 +16,15 @@
 	on:submit|preventDefault={e => {
 		$vscodeStore.searchQuery = e.target.searchQuery.value;
 		if ($vscodeStore.searchQuery) {
-			$vscodeStore.searchResults = [
-				{
-					filename: 'App.jsx',
-					matches: [
-						{
-							start: { line: 0, character: 0 },
-							end: { line: 0, character: 10 },
-							matchText: 'import React from "react"',
-						},
-					],
-				},
-			];
+			console.log({vscode});
+			$vscodeStore.searchResults=null;
+			vscode.postMessage({
+				command: 'searchQuery',
+				data: {
+					searchQuery: $vscodeStore.searchQuery,
+				}
+			});
+			console.log('postMessage');
 		}
 	}}
 >
