@@ -4,7 +4,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import { CodeSearchViewProvider } from './CodeSearchViewProvider';
-import { structuredSearch } from './utils';
+import { structuredReplace, structuredSearch } from './utils';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -67,6 +67,23 @@ export function activate(context: vscode.ExtensionContext) {
 		console.log(`workspacePath: ${workspacePath} language: ${language}`);
 
 		const result = await structuredSearch('console.log(:[a])', workspacePath, language);
+		console.log(result);
+	}
+	));
+
+	context.subscriptions.push(vscode.commands.registerCommand('advanced-code-search.structuredReplace', async () => {
+		vscode.window.showInformationMessage('Hello from structuredReplace!');
+
+		const workspacePath = vscode.workspace.workspaceFolders?.[0].uri.path ?? '/home/shivendu/projects/vscode-advanced-search/demo';
+		if (!workspacePath) {
+			vscode.window.showErrorMessage('Please open a workspace first');
+			return;
+		}
+		const language = `.${vscode.workspace.textDocuments[0]?.languageId ?? 'js'}`;
+
+		console.log(`workspacePath: ${workspacePath} language: ${language}`);
+
+		const result = await structuredReplace('console.log(:[a])', 'console.log("hello")', workspacePath, language);
 		console.log(result);
 	}
 	));
