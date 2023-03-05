@@ -11,7 +11,7 @@ This extension allows you to do a structured search on the code and replace it. 
 4. Install comby from https://comby.dev/docs/get-started
 5. Open the "Run and debug" panel in VS code and click "Run Extension" to run the extension
 
-## Basic example 
+## Basic example
 
 Here is a simple js program written using AMD modules
 ```js
@@ -23,15 +23,15 @@ define(['utils/crashDetection', 'utils/selfDriving'], function (crashDetection, 
         }
     }
 })
-``` 
+```
 Now if we want to convert it to use ES6 dynamic import instead:
 
-Enter the following search query in the search box: 
+Enter the following search query in the search box:
 ```js
 define([:[s1], :[s2]], function (:[v1], :[v2]) {:[body]})
 ```
 
-And the following replace query: 
+And the following replace query:
 ```js
 import(
     Promise.all([import(:[s1]), import(:[s2])]).then(([:[v1],:[v2]]) => {
@@ -39,11 +39,11 @@ import(
     })
 )
 ```
- 
-and press  `replace` button. 
+
+and press  `replace` button.
 
 in the right pane we can see the applied change:
-```
+```js
 import(
     Promise.all([import('utils/crashDetection'), import('utils/selfDriving')]).then(([crashDetection, selfDriving]) => {
         // full self driving
@@ -60,8 +60,8 @@ This change is impossible to do with regex since it cannot understand balanced p
 
 You can make changes in the diff view and save and close the diff view to apply the changes.
 
-we're using Comby. Please refer comby docs: https://comby.dev/docs/overview 
+We're using Comby. Please refer comby docs: https://comby.dev/docs/overview
 
 
-## Citation: 
+## Citation:
 https://github.com/comby-tools/comby
