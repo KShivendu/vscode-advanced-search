@@ -16,6 +16,10 @@
 			{
 				"command": "advanced-code-search.helloWorld",
 				"title": "Hello World"
+			},
+			{
+				"command": "advanced-code-search.structuredSearch",
+				"title": "Structured Search"
 			}
 		],
 		"views": {

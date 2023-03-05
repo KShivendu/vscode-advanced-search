@@ -7,7 +7,7 @@ let lastVscodeState: State = vscode.getState() ?? {
 	searchResults: null,
 };
 
-type Match = {
+export type Match = {
 	start: {
 		line: number;
 		character: number;
@@ -18,7 +18,7 @@ type Match = {
 	};
 };
 
-type FileResult = {
+export type FileResult = {
 	filename: string;
 	matches: Match[];
 };
