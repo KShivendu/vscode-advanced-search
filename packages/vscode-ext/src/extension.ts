@@ -4,9 +4,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import { CodeSearchViewProvider } from './CodeSearchViewProvider';
-import { structuredReplace, structuredSearch } from './utils';
-// import write properties from fs:
-import { close, writeFileSync } from 'fs';
+import { structuredSearch, structuredReplace } from './utils';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -64,7 +62,7 @@ export function activate(context: vscode.ExtensionContext) {
 			vscode.window.showErrorMessage('Please open a workspace first');
 			return;
 		}
-		const language = `.${vscode.workspace.textDocuments[0]?.languageId ?? 'js'}`;
+		const language = `.js`; // `.${vscode.workspace.textDocuments[0]?.languageId ?? 'js'}`;
 
 		console.log(`workspacePath: ${workspacePath} language: ${language}`);
 
@@ -81,41 +79,11 @@ export function activate(context: vscode.ExtensionContext) {
 			vscode.window.showErrorMessage('Please open a workspace first');
 			return;
 		}
-		const language = `.${vscode.workspace.textDocuments[0]?.languageId ?? 'js'}`;
+		const language = `.js`; // `.${vscode.workspace.textDocuments[0]?.languageId ?? 'js'}`;
 
 		console.log(`workspacePath: ${workspacePath} language: ${language}`);
 
-		const result = await structuredReplace('console.log(:[a])', 'console.log("hello")', workspacePath, language);
-		console.log(result);
-
-		// Iterate over all the results and show diff one by one (Store the result in a file and then show diff):
-		// Keep this temp file common for all the results:
-		// It should be in /tmp/ folder
-
-		const tempFile = path.join(workspacePath, 'tempFile');
-
-		for (const file of result) {
-			// Write the updated file content to the temp file
-			writeFileSync(tempFile, file.updatedFileContent);
-
-			// const git = vscode.extensions.getExtension('vscode.git').exports.getAPI(1);
-			//
-			let res = await vscode.commands.executeCommand(
-				"vscode.diff",
-				vscode.Uri.file(file.filename),
-				vscode.Uri.file(tempFile),
-				'Structured Replace diff'
-			);
-
-			const finalContent = await new Promise((res, rej) => {
-				vscode.workspace.onDidCloseTextDocument((closedDoc) => {
-					const tempWasClosed = closedDoc.fileName.endsWith('tempFile') && closedDoc.isClosed;
-					if (tempWasClosed) res(closedDoc.getText());
-				});
-			});
-			
-			writeFileSync(file.filename, finalContent);
-		}
+		await structuredReplace('console.log(:[a])', 'console.log("hello")', workspacePath, language);
 	}
 
 	));

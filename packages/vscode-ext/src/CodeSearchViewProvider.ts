@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs/promises';
 import * as path from 'path';
-import { structuredSearch } from './utils';
+import { structuredReplace, structuredSearch } from './utils';
 import { openMatchInEditor } from './vscodeUtils';
 
 export class CodeSearchViewProvider implements vscode.WebviewViewProvider {
@@ -56,6 +56,31 @@ export class CodeSearchViewProvider implements vscode.WebviewViewProvider {
 							});
 							console.log('searchResults sent');
 							
+							break;
+						}
+						case 'replaceQuery': {
+							console.log("Replace command recieved");
+
+							const searchQuery = message.data.searchQuery as string;
+							const replaceQuery = message.data.replaceQuery as string;
+							const workspacePath = vscode.workspace.workspaceFolders?.[0].uri.path ?? '/home/shivendu/projects/vscode-advanced-search/demo';
+							if (!workspacePath) {
+								vscode.window.showErrorMessage('Please open a workspace first');
+								return;
+							}
+							const language = `.${ 'js'}`;
+
+							console.log(`workspacePath: ${workspacePath} language: ${language}`);
+							console.log(`searchQuery: ${searchQuery} replaceQuery: ${replaceQuery}`);
+							
+
+							await structuredReplace(searchQuery, replaceQuery, workspacePath, language);
+
+							webviewView.webview.postMessage({
+								command: 'searchResults',
+								data:{searchResults: []}
+							});
+
 							break;
 						}
 						case 'openMatchInEditor': {
