@@ -13,6 +13,7 @@ type State = {
 	searchInput: string;
 	replaceInput: string;
 	searchQuery: string;
+	replaceQuery: string;
 	searchResults: FileResult[] | null;
 };
 
