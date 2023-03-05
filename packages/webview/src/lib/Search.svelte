@@ -15,6 +15,7 @@
 <form
 	on:submit|preventDefault={e => {
 		$vscodeStore.searchQuery = e.target.searchQuery.value;
+		$vscodeStore.replaceQuery = e.target.replaceQuery.value;
 		if ($vscodeStore.searchQuery) {
 			console.log({vscode});
 			$vscodeStore.searchResults=null;
@@ -22,6 +23,7 @@
 				command: 'searchQuery',
 				data: {
 					searchQuery: $vscodeStore.searchQuery,
+					replaceQuery: $vscodeStore.replaceQuery,
 				}
 			});
 			console.log('postMessage');
@@ -35,6 +37,17 @@
 		}}
 		name="searchQuery"
 		placeholder="Search query"
+		autofocus
+		style="width: 100%;"
+	/>
+
+	<vscode-text-area
+		value={$vscodeStore.replaceInput}
+		on:input={e => {
+			$vscodeStore.replaceInput = e.target.value;
+		}}
+		name="replaceQuery"
+		placeholder="Replace query"
 		autofocus
 		style="width: 100%;"
 	/>
