@@ -4,6 +4,8 @@ This extension allows you to do a structured search on the code and replace it. 
 
 > Checkout https://youtu.be/J11cLFDFXTk for the demo video
 
+[![VSCode advanced (structured) search and replace extension](http://img.youtube.com/vi/J11cLFDFXTk/0.jpg)](https://www.youtube.com/watch?v=J11cLFDFXTk)
+
 ## Setup:
 
 1. Follow https://pnpm.io/installation to install pnpm.
